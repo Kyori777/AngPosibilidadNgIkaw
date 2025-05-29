@@ -1,0 +1,30 @@
+body {
+    font-family: Georgia, serif;
+    background: #fdfcfb;
+    color: #333;
+    margin: 0;
+    padding: 2em;
+    line-height: 1.6;
+}
+.container {
+    max-width: 700px;
+    margin: auto;
+}
+h1, h2 {
+    font-weight: normal;
+}
+.poem-preview {
+    margin-bottom: 2em;
+}
+.poem {
+    background: #fff;
+    padding: 1em;
+    border-left: 4px solid #aaa;
+    margin-top: 1em;
+    white-space: pre-wrap;
+    font-style: italic;
+}
+.timestamp {
+    font-size: 0.8em;
+    color: #888;
+}
