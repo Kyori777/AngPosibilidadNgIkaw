@@ -1,32 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Add Poem</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>Add a Poem</h1>
   <form id="poemForm">
-    <input name="title" placeholder="Title" required><br>
-    <textarea name="content" placeholder="Poem content..." required></textarea><br>
+    <input name="title" placeholder="Title" required /><br />
+    <textarea name="content" placeholder="Poem content..." required></textarea><br />
     <button type="submit">Add</button>
   </form>
 
   <p id="status"></p>
+
   <script type="module">
     import { supabase } from "./app.js";
 
-    document.getElementById("poemForm").addEventListener("submit", async (e) => {
+    const form = document.getElementById("poemForm");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const title = e.target.title.value;
-      const content = e.target.content.value;
 
-      const { error } = await supabase
-        .from("poems")
-        .insert({ title, content });
+      const title = e.target.title.value.trim();
+      const content = e.target.content.value.trim();
 
-      document.getElementById("status").textContent = error ? "Error adding poem." : "Poem added!";
-      e.target.reset();
+      if (!title || !content) {
+        status.textContent = "Please fill in all fields.";
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from("poem")
+        .insert([{ title, content }]);
+
+      if (error) {
+        console.error("Insert error:", error);
+        status.textContent = `Error adding poem: ${error.message}`;
+      } else {
+        status.textContent = "Poem added successfully!";
+        form.reset();
+      }
     });
   </script>
 </body>
