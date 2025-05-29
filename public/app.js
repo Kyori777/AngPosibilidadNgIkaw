@@ -26,3 +26,5 @@ if (path.endsWith("index.html") || path === "/") {
     });
   }
 }
+loadPoems();
+
