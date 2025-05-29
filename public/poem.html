@@ -22,10 +22,12 @@
     if (error) document.body.innerHTML = "Poem not found.";
     else {
       const div = document.getElementById("poem-container");
-      div.innerHTML = `
-        <h2>${data.title}</h2>
-        <p>${data.content.replace(/\n/g, "<br>")}</p>
-      `;
+     div.innerHTML = `
+  <h2><a href="poem.html?id=${poem.id}">${poem.title}</a></h2>
+  <p class="poem-content">${poem.content}</p>
+  <hr>
+`;
+
     }
   </script>
 </body>

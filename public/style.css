@@ -76,3 +76,10 @@ textarea:focus {
   font-style: italic;
   color: #555;
 }
+
+.poem-content {
+  white-space: pre-wrap;
+  font-family: Georgia, serif;
+  color: #4b2e2e;
+  margin-bottom: 1em;
+}
