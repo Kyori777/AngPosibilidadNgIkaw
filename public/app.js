@@ -9,9 +9,14 @@ const path = window.location.pathname;
 
 if (path.endsWith("index.html") || path === "/") {
   const { data, error } = await supabase
-    .from("poems")
+    .from("poem")
     .select("*")
     .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error loading poems:", error);
+    return;
+  }
 
   const container = document.getElementById("poems");
   data.forEach(poem => {
