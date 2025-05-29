@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Poem</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Add a Poem</h1>
+  <form id="poemForm">
+    <input name="title" placeholder="Title" required><br>
+    <textarea name="content" placeholder="Poem content..." required></textarea><br>
+    <button type="submit">Add</button>
+  </form>
+
+  <p id="status"></p>
+  <script type="module">
+    import { supabase } from "./app.js";
+
+    document.getElementById("poemForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const title = e.target.title.value;
+      const content = e.target.content.value;
+
+      const { error } = await supabase
+        .from("poems")
+        .insert({ title, content });
+
+      document.getElementById("status").textContent = error ? "Error adding poem." : "Poem added!";
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
