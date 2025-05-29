@@ -3,6 +3,11 @@
 <head>
   <title>Poem</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .poem-content {
+      white-space: pre-wrap;
+    }
+  </style>
 </head>
 <body>
   <div id="poem-container"></div>
@@ -10,24 +15,25 @@
 
   <script type="module">
     import { supabase } from "./app.js";
+
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
 
-    const { data, error } = await supabase
+    const { data: poem, error } = await supabase
       .from("poem")
       .select("*")
       .eq("id", id)
       .single();
 
-    if (error) document.body.innerHTML = "Poem not found.";
-    else {
+    if (error) {
+      document.body.innerHTML = "Poem not found.";
+    } else {
       const div = document.getElementById("poem-container");
-     div.innerHTML = `
-  <h2><a href="poem.html?id=${poem.id}">${poem.title}</a></h2>
-  <p class="poem-content">${poem.content}</p>
-  <hr>
-`;
-
+      div.innerHTML = `
+        <h2>${poem.title}</h2>
+        <p class="poem-content">${poem.content}</p>
+        <hr>
+      `;
     }
   </script>
 </body>
