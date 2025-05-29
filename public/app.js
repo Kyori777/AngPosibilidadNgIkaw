@@ -27,11 +27,12 @@ async function loadPoems() {
 
     data.forEach(poem => {
       const div = document.createElement("div");
-      div.innerHTML = `
-        <h2><a href="poem.html?id=${poem.id}">${poem.title}</a></h2>
-        <p>${poem.content.slice(0, 150).replace(/\n/g, " ")}...</p>
-        <hr>
-      `;
+     div.innerHTML = `
+  <h2><a href="poem.html?id=${poem.id}">${poem.title}</a></h2>
+  <p class="poem-content">${poem.content}</p>
+  <hr>
+`;
+
       container.appendChild(div);
     });
   }
